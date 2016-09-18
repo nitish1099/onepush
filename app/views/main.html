@@ -1,0 +1,75 @@
+
+
+
+
+<form class="col s12">
+  <div class="row">
+    <div class="input-field col s12">
+      <angucomplete-alt id="ex1"
+                    placeholder="Search (by title, taf or URL)"
+                    pause="100"
+                    selected-object="keySelected"
+                    local-data="websites"
+                    search-fields="title"
+                    title-field="title"
+                    minlength="1"
+                    input-class="form-control form-control-small"
+                    input-changed="inputChanged"
+                    >
+                  </angucomplete-alt>
+                  
+    </div>
+    <div class="col s6 offset-s3 offset-m4 m4 result-total center-align z-depth-1">
+      Total {{results.length}} results found 
+    </div>
+  </div>
+</form>
+<div class = "col s12 l8">
+  <ul class="collection">
+    <li class="collection-item avatar hoverable" ng-repeat="website in websites | filter:searchKey as results">
+      <img ng-src="{{website.favicon_image}}" alt="" class="circle">
+      <span class="title">{{website.title}}</span>
+      <p>
+        <i class="material-icons tiny tag">label</i>
+        <span>{{website.tag}}</span>
+      </p>
+      <p>
+         <a href="{{website.url_address}}" class="url" target="_blank">{{website.url_address}}</a>
+      </p>
+      <span class="secondary-content">
+        <i class="material-icons like" ng-click="hitLike($index)">thumb_up</i>
+        <p>
+        {{total_likes[$index]}} likes
+        </p>
+      </span>
+    </li>
+  </ul>
+</div>
+<div class = "col  s12 l4" id="web-form">
+  <form class="col s12 center-align" ng-submit="pushWebsite(pushWeb.title,pushWeb.url,pushWeb.tag)">
+        <p>Contribute / Add website</p>
+        <div class="row left-align">
+          <div class="input-field col s12">
+            <input  type="text" class="validate" ng-model="pushWeb.title" autocomplete="off" required>
+            <label>title</label>
+          </div>
+          <div class="input-field col s12">
+            <input type="text" class="validate" ng-model="pushWeb.url"autocomplete="off" required>
+            <label>web/url address</label>
+          </div>
+          <div class="input-field col s12">
+            <input type="text" class="validate" ng-model="pushWeb.tag" autocomplete="off" required>
+            <label>tag</label>
+          </div>
+        </div>
+          <button class="btn waves-effect waves-light save-btn" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+      </form>
+</div>
+
+ <div id="modal1" class="modal">
+    <div class="modal-content center-align">
+      <p>{{modalText}}</p>
+    </div>
+  </div>
